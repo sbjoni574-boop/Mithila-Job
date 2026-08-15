@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mithila Job - मिथिला की नौकरियाँ | Job Portal for Mithila Region</title>
+<meta name="description" content="Mithila Job - दरभंगा, मधुबनी, समस्तीपुर, सीतामढ़ी और पूरे मिथिला क्षेत्र की नौकरियाँ एक जगह। Find jobs in Darbhanga, Madhubani, Samastipur and Mithila region.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        mithila: {
+          red: '#C0392B',
+          orange: '#E67E22',
+          yellow: '#F1C40F',
+          green: '#1E8449',
+          dark: '#1a1a2e'
+        }
+      },
+      fontFamily: {
+        hindi: ['"Noto Sans Devanagari"', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-gray-50 font-hindi text-gray-800">
+
+<!-- ============ NAVBAR ============ -->
+<nav class="bg-white shadow-md sticky top-0 z-50 border-b-4 border-mithila-red">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3" onclick="showPage('home')">
+      <div class="w-11 h-11 rounded-full bg-gradient-to-br from-mithila-red to-mithila-orange flex items-center justify-center text-white text-xl font-bold shadow">
+        <i class="fa-solid fa-briefcase"></i>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold text-mithila-red leading-tight">Mithila Job</h1>
+        <p class="text-xs text-gray-500 -mt-0.5">मिथिला की नौकरियाँ</p>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-6 font-medium">
+      <a href="#" onclick="showPage('home')" class="nav-link hover:text-mithila-red transition">होम</a>
+      <a href="#" onclick="showPage('jobs')" class="nav-link hover:text-mithila-red transition">सभी नौकरियाँ</a>
+      <a href="#" onclick="showPage('post')" class="nav-link hover:text-mithila-red transition">नौकरी पोस्ट करें</a>
+      <a href="#" onclick="showPage('about')" class="nav-link hover:text-mithila-red transition">हमारे बारे में</a>
+      <button onclick="showPage('post')" class="bg-mithila-red hover:bg-red-700 text-white px-5 py-2 rounded-full shadow transition">
+        <i class="fa-solid fa-plus mr-1"></i> Job पोस्ट करें
+      </button>
+    </div>
+    <button class="md:hidden text-2xl text-mithila-red" onclick="toggleMobileMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-4 py-3 space-y-2">
+    <a href="#" onclick="showPage('home')" class="block py-2 hover:text-mithila-red">होम</a>
+    <a href="#" onclick="showPage('jobs')" class="block py-2 hover:text-mithila-red">सभी नौकरियाँ</a>
+    <a href="#" onclick="showPage('post')" class="block py-2 hover:text-mithila-red">नौकरी पोस्ट करें</a>
+    <a href="#" onclick="showPage('about')" class="block py-2 hover:text-mithila-red">हमारे बारे में</a>
+  </div>
+</nav>
+
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="page">
+  <!-- Hero -->
+  <section class="mithila-hero text-white py-16 md:py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-snug">मिथिला क्षेत्र की <span class="text-mithila-yellow">बेहतरीन नौकरियाँ</span><br>एक ही जगह पर!</h2>
+      <p class="text-lg md:text-xl opacity-90 mb-8">दरभंगा • मधुबनी • समस्तीपुर • सीतामढ़ी • मुज़फ़्फ़रपुर • बेगूसराय • जनकपुर</p>
+      <!-- Search Bar -->
+      <div class="bg-white rounded-2xl shadow-2xl p-3 md:p-4 max-w-3xl mx-auto flex flex-col md:flex-row gap-3">
+        <div class="flex-1 flex items-center gap-2 bg-gray-50 rounded-xl px-4 py-3">
+          <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+          <input id="heroSearch" type="text" placeholder="नौकरी खोजें... (जैसे: Teacher, Driver, Computer)" class="bg-transparent w-full outline-none text-gray-700">
+        </div>
+        <select id="heroLocation" class="bg-gray-50 rounded-xl px-4 py-3 text-gray-700 outline-none md:w-48">
+          <option value="">सभी जिले</option>
+        </select>
+        <button onclick="heroSearchGo()" class="bg-mithila-red hover:bg-red-700 text-white px-8 py-3 rounded-xl font-semibold transition shadow">
+          खोजें <i class="fa-solid fa-arrow-right ml-1"></i>
+        </button>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm md:text-base">
+        <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-mithila-yellow"></i> 100% मुफ़्त</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-mithila-yellow"></i> लोकल नौकरियाँ</div>
+        <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-mithila-yellow"></i> सीधा संपर्क</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="max-w-7xl mx-auto px-4 -mt-8 relative z-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white rounded-2xl shadow-lg p-5 text-center border-t-4 border-mithila-red">
+        <div id="statJobs" class="text-3xl font-bold text-mithila-red">0</div>
+        <div class="text-gray-500 text-sm mt-1">कुल नौकरियाँ</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-5 text-center border-t-4 border-mithila-orange">
+        <div id="statCompanies" class="text-3xl font-bold text-mithila-orange">0</div>
+        <div class="text-gray-500 text-sm mt-1">कंपनियाँ</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-5 text-center border-t-4 border-mithila-green">
+        <div id="statLocations" class="text-3xl font-bold text-mithila-green">0</div>
+        <div class="text-gray-500 text-sm mt-1">जिले</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-5 text-center border-t-4 border-mithila-yellow">
+        <div id="statCategories" class="text-3xl font-bold text-yellow-600">0</div>
+        <div class="text-gray-500 text-sm mt-1">श्रेणियाँ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="max-w-7xl mx-auto px-4 py-14">
+    <h3 class="text-2xl md:text-3xl font-bold text-center mb-2">श्रेणी के अनुसार <span class="text-mithila-red">खोजें</span></h3>
+    <p class="text-center text-gray-500 mb-8">अपनी पसंद की श्रेणी चुनें</p>
+    <div id="categoryGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+  </section>
+
+  <!-- Latest Jobs -->
+  <section class="bg-white py-14">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold">ताज़ा <span class="text-mithila-red">नौकरियाँ</span></h3>
+          <p class="text-gray-500 mt-1">अभी-अभी पोस्ट की गई नौकरियाँ</p>
+        </div>
+        <button onclick="showPage('jobs')" class="text-mithila-red font-semibold hover:underline">सभी देखें <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div id="latestJobs" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="max-w-7xl mx-auto px-4 py-14">
+    <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">कैसे काम <span class="text-mithila-red">करता है?</span></h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="text-center p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
+        <div class="w-16 h-16 mx-auto rounded-full bg-red-50 text-mithila-red flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-magnifying-glass"></i></div>
+        <h4 class="font-bold text-lg mb-2">1. नौकरी खोजें</h4>
+        <p class="text-gray-500 text-sm">अपने जिले और श्रेणी के अनुसार नौकरी खोजें</p>
+      </div>
+      <div class="text-center p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
+        <div class="w-16 h-16 mx-auto rounded-full bg-orange-50 text-mithila-orange flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-file-lines"></i></div>
+        <h4 class="font-bold text-lg mb-2">2. विवरण देखें</h4>
+        <p class="text-gray-500 text-sm">सैलरी, योग्यता और काम की पूरी जानकारी पढ़ें</p>
+      </div>
+      <div class="text-center p-6 bg-white rounded-2xl shadow hover:shadow-lg transition">
+        <div class="w-16 h-16 mx-auto rounded-full bg-green-50 text-mithila-green flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-phone"></i></div>
+        <h4 class="font-bold text-lg mb-2">3. सीधा संपर्क करें</h4>
+        <p class="text-gray-500 text-sm">फोन या WhatsApp से सीधे नियोक्ता से बात करें</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mithila-cta py-14 text-white text-center px-4">
+    <h3 class="text-2xl md:text-3xl font-bold mb-3">क्या आप कर्मचारी ढूंढ रहे हैं?</h3>
+    <p class="opacity-90 mb-6">अपनी नौकरी मुफ़्त में पोस्ट करें और सही उम्मीदवार पाएँ</p>
+    <button onclick="showPage('post')" class="bg-white text-mithila-red font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition">
+      <i class="fa-solid fa-plus mr-2"></i>मुफ़्त में Job पोस्ट करें
+    </button>
+  </section>
+</div>
+
+<!-- ============ JOBS PAGE ============ -->
+<div id="page-jobs" class="page hidden">
+  <section class="bg-gradient-to-r from-mithila-red to-mithila-orange text-white py-10 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fa-solid fa-briefcase mr-2"></i>सभी नौकरियाँ</h2>
+      <p class="opacity-90">मिथिला क्षेत्र की सभी उपलब्ध नौकरियाँ</p>
+    </div>
+  </section>
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Filters -->
+    <div class="bg-white rounded-2xl shadow p-4 mb-6 grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div class="flex items-center gap-2 bg-gray-50 rounded-xl px-4 py-2.5">
+        <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+        <input id="filterSearch" type="text" placeholder="खोजें..." class="bg-transparent w-full outline-none" oninput="renderJobs()">
+      </div>
+      <select id="filterLocation" class="bg-gray-50 rounded-xl px-4 py-2.5 outline-none" onchange="renderJobs()">
+        <option value="">सभी जिले</option>
+      </select>
+      <select id="filterCategory" class="bg-gray-50 rounded-xl px-4 py-2.5 outline-none" onchange="renderJobs()">
+        <option value="">सभी श्रेणियाँ</option>
+      </select>
+      <select id="filterType" class="bg-gray-50 rounded-xl px-4 py-2.5 outline-none" onchange="renderJobs()">
+        <option value="">सभी प्रकार</option>
+        <option value="Full Time">Full Time</option>
+        <option value="Part Time">Part Time</option>
+        <option value="Contract">Contract</option>
+      </select>
+    </div>
+    <div id="jobsCount" class="text-gray-500 mb-4"></div>
+    <div id="jobsList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    <div id="noJobs" class="hidden text-center py-16">
+      <i class="fa-solid fa-face-frown text-5xl text-gray-300 mb-4"></i>
+      <p class="text-gray-500 text-lg">कोई नौकरी नहीं मिली। कृपया फ़िल्टर बदलें।</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ POST JOB PAGE ============ -->
+<div id="page-post" class="page hidden">
+  <section class="bg-gradient-to-r from-mithila-green to-emerald-600 text-white py-10 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fa-solid fa-plus-circle mr-2"></i>नौकरी पोस्ट करें</h2>
+      <p class="opacity-90">100% मुफ़्त — अपनी नौकरी की जानकारी भरें</p>
+    </div>
+  </section>
+  <section class="max-w-3xl mx-auto px-4 py-8">
+    <form id="postJobForm" class="bg-white rounded-2xl shadow-lg p-6 md:p-8 space-y-5" onsubmit="submitJob(event)">
+      <div class="grid md:grid-cols-2 gap-5">
+        <div>
+          <label class="block font-semibold mb-1.5">नौकरी का नाम <span class="text-red-500">*</span></label>
+          <input required id="pj_title" type="text" placeholder="जैसे: Computer Operator" class="form-input">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1.5">कंपनी / दुकान का नाम <span class="text-red-500">*</span></label>
+          <input required id="pj_company" type="text" placeholder="जैसे: Mithila Traders" class="form-input">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1.5">जिला <span class="text-red-500">*</span></label>
+          <select required id="pj_location" class="form-input"></select>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1.5">श्रेणी <span class="text-red-500">*</span></label>
+          <select required id="pj_category" class="form-input"></select>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1.5">नौकरी का प्रकार <span class="text-red-500">*</span></label>
+          <select required id="pj_type" class="form-input">
+            <option value="Full Time">Full Time</option>
+            <option value="Part Time">Part Time</option>
+            <option value="Contract">Contract</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1.5">सैलरी (महीना) <span class="text-red-500">*</span></label>
+          <input required id="pj_salary" type="text" placeholder="जैसे: ₹8,000 - ₹12,000" class="form-input">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1.5">योग्यता</label>
+          <input id="pj_qualification" type="text" placeholder="जैसे: 10वीं पास" class="form-input">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1.5">संपर्क नंबर <span class="text-red-500">*</span></label>
+          <input required id="pj_phone" type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का मोबाइल नंबर" class="form-input">
+        </div>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1.5">नौकरी का विवरण <span class="text-red-500">*</span></label>
+        <textarea required id="pj_description" rows="4" placeholder="काम के बारे में विस्तार से लिखें..." class="form-input"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-mithila-green hover:bg-green-700 text-white font-bold py-3.5 rounded-xl shadow transition text-lg">
+        <i class="fa-solid fa-paper-plane mr-2"></i>नौकरी पोस्ट करें
+      </button>
+    </form>
+  </section>
+</div>
+
+<!-- ============ ABOUT PAGE ============ -->
+<div id="page-about" class="page hidden">
+  <section class="bg-gradient-to-r from-mithila-dark to-gray-800 text-white py-10 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-2"><i class="fa-solid fa-circle-info mr-2"></i>हमारे बारे में</h2>
+    </div>
+  </section>
+  <section class="max-w-4xl mx-auto px-4 py-10 space-y-6">
+    <div class="bg-white rounded-2xl shadow p-6 md:p-8">
+      <h3 class="text-xl font-bold text-mithila-red mb-3">Mithila Job क्या है?</h3>
+      <p class="text-gray-600 leading-relaxed">Mithila Job मिथिला क्षेत्र (दरभंगा, मधुबनी, समस्तीपुर, सीतामढ़ी, मुज़फ़्फ़रपुर, बेगूसराय, जनकपुर आदि) के लिए बनाया गया एक <b>मुफ़्त जॉब पोर्टल</b> है। हमारा उद्देश्य है कि मिथिला के युवाओं को अपने ही क्षेत्र में रोज़गार मिले और स्थानीय व्यवसायों को अच्छे कर्मचारी मिलें।</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h4 class="font-bold text-lg mb-2 text-mithila-green"><i class="fa-solid fa-user mr-2"></i>नौकरी खोजने वालों के लिए</h4>
+        <ul class="text-gray-600 space-y-2 text-sm">
+          <li><i class="fa-solid fa-check text-mithila-green mr-2"></i>अपने जिले की नौकरियाँ खोजें</li>
+          <li><i class="fa-solid fa-check text-mithila-green mr-2"></i>सैलरी और योग्यता की पूरी जानकारी</li>
+          <li><i class="fa-solid fa-check text-mithila-green mr-2"></i>नियोक्ता से सीधा संपर्क</li>
+          <li><i class="fa-solid fa-check text-mithila-green mr-2"></i>बिल्कुल मुफ़्त सेवा</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h4 class="font-bold text-lg mb-2 text-mithila-orange"><i class="fa-solid fa-building mr-2"></i>नियोक्ताओं के लिए</h4>
+        <ul class="text-gray-600 space-y-2 text-sm">
+          <li><i class="fa-solid fa-check text-mithila-orange mr-2"></i>मुफ़्त में नौकरी पोस्ट करें</li>
+          <li><i class="fa-solid fa-check text-mithila-orange mr-2"></i>लोकल उम्मीदवार पाएँ</li>
+          <li><i class="fa-solid fa-check text-mithila-orange mr-2"></i>कोई कमीशन नहीं</li>
+          <li><i class="fa-solid fa-check text-mithila-orange mr-2"></i>आसान और तेज़ प्रक्रिया</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ JOB DETAIL MODAL ============ -->
+<div id="jobModal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4" onclick="if(event.target===this)closeModal()">
+  <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+    <div id="jobModalContent"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-mithila-green text-white px-6 py-3 rounded-full shadow-lg z-[110] font-semibold"></div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-mithila-dark text-gray-300 mt-10">
+  <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+    <div>
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-9 h-9 rounded-full bg-mithila-red flex items-center justify-center text-white"><i class="fa-solid fa-briefcase"></i></div>
+        <span class="font-bold text-white text-lg">Mithila Job</span>
+      </div>
+      <p class="text-sm text-gray-400">मिथिला क्षेत्र का अपना जॉब पोर्टल। रोज़गार अपने घर के पास।</p>
+    </div>
+    <div>
+      <h5 class="font-bold text-white mb-3">त्वरित लिंक</h5>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#" onclick="showPage('home')" class="hover:text-white">होम</a></li>
+        <li><a href="#" onclick="showPage('jobs')" class="hover:text-white">सभी नौकरियाँ</a></li>
+        <li><a href="#" onclick="showPage('post')" class="hover:text-white">नौकरी पोस्ट करें</a></li>
+        <li><a href="#" onclick="showPage('about')" class="hover:text-white">हमारे बारे में</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="font-bold text-white mb-3">मुख्य जिले</h5>
+      <p class="text-sm text-gray-400 leading-relaxed">दरभंगा • मधुबनी • समस्तीपुर • सीतामढ़ी • मुज़फ़्फ़रपुर • बेगूसराय • सहरसा • जनकपुर</p>
+    </div>
+  </div>
+  <div class="border-t border-gray-700 py-4 text-center text-sm text-gray-500">
+    © 2026 Mithila Job — मिथिला के लिए ❤️ से बनाया गया
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
