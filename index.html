@@ -2,9 +2,29 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Mithila Job - मिथिला की नौकरियाँ | Job Portal for Mithila Region</title>
 <meta name="description" content="Mithila Job - दरभंगा, मधुबनी, समस्तीपुर, सीतामढ़ी और पूरे मिथिला क्षेत्र की नौकरियाँ एक जगह। Find jobs in Darbhanga, Madhubani, Samastipur and Mithila region.">
+
+<!-- ============ PWA META & MANIFEST ============ -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#C0392B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mithila Job">
+<meta name="application-name" content="Mithila Job">
+<meta name="msapplication-TileColor" content="#C0392B">
+<meta name="msapplication-TileImage" content="icons/icon-144x144.png">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192x192.png">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -53,6 +73,9 @@ tailwind.config = {
       <button onclick="showPage('post')" class="bg-mithila-red hover:bg-red-700 text-white px-5 py-2 rounded-full shadow transition">
         <i class="fa-solid fa-plus mr-1"></i> Job पोस्ट करें
       </button>
+      <button id="installBtn" onclick="installPWA()" class="hidden bg-mithila-green hover:bg-green-700 text-white px-4 py-2 rounded-full shadow transition">
+        <i class="fa-solid fa-download mr-1"></i> App Install करें
+      </button>
     </div>
     <button class="md:hidden text-2xl text-mithila-red" onclick="toggleMobileMenu()">
       <i class="fa-solid fa-bars"></i>
@@ -63,8 +86,25 @@ tailwind.config = {
     <a href="#" onclick="showPage('jobs')" class="block py-2 hover:text-mithila-red">सभी नौकरियाँ</a>
     <a href="#" onclick="showPage('post')" class="block py-2 hover:text-mithila-red">नौकरी पोस्ट करें</a>
     <a href="#" onclick="showPage('about')" class="block py-2 hover:text-mithila-red">हमारे बारे में</a>
+    <button id="installBtnMobile" onclick="installPWA()" class="hidden w-full bg-mithila-green text-white px-4 py-2.5 rounded-xl shadow mt-2">
+      <i class="fa-solid fa-download mr-1"></i> App Install करें
+    </button>
   </div>
 </nav>
+
+<!-- ============ INSTALL PWA BANNER (iOS / fallback) ============ -->
+<div id="iosInstallBanner" class="hidden fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 z-[120]">
+  <div class="flex items-start gap-3">
+    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-mithila-red to-mithila-orange flex items-center justify-center text-white text-lg shrink-0">
+      <i class="fa-solid fa-briefcase"></i>
+    </div>
+    <div class="flex-1">
+      <p class="font-bold text-sm mb-1">Mithila Job को App की तरह Install करें</p>
+      <p class="text-xs text-gray-500">नीचे Share <i class="fa-solid fa-arrow-up-from-bracket"></i> बटन दबाएँ, फिर "Add to Home Screen" चुनें।</p>
+    </div>
+    <button onclick="document.getElementById('iosInstallBanner').classList.add('hidden'); localStorage.setItem('mithilaIosBannerDismissed','1')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+</div>
 
 <!-- ============ HOME PAGE ============ -->
 <div id="page-home" class="page">
@@ -341,5 +381,6 @@ tailwind.config = {
 
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script src="js/pwa.js"></script>
 </body>
 </html>
